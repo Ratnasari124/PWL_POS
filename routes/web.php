@@ -3,6 +3,7 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,3 +121,11 @@ Route::get('/user/{id}/name/{name}', [UserController::class, 'showProfile']);
 use App\Http\Controllers\SalesController;
 
 Route::get('localhost:8081/POS/public/sales', [SalesController::class, 'index']);
+
+//JS 3 PRAKTIKUM 4
+use App\Http\Controllers\LevelController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/level', [LevelController::class, 'index']);
