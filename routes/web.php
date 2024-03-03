@@ -129,3 +129,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/level', [LevelController::class, 'index']);
+
+//JS 3 PRAKTIKUM 5
+use App\Http\Controllers\KategoriController;
+
+Route::get('/kategori', [KategoriController::class, 'index']);
