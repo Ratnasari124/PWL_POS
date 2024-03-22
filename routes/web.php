@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,37 +12,8 @@ use Illuminate\Support\Facades\DB;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-use App\Http\Controllers\UserController;
-
-//JS 3 PRAKTIKUM 4
-use App\Http\Controllers\LevelController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/level', [LevelController::class, 'index']);
-
-//JS 3 PRAKTIKUM 5
 use App\Http\Controllers\KategoriController;
 
-Route::get('/kategori', [KategoriController::class, 'index']);
-
-//JS 3 PRAKTIKUM 6
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/level', [LevelController::class, 'index']);
-Route::get('/kategori', [KategoriController::class, 'index']);
-Route::get('/user', [UserController::class, 'index']);
-
-//PWL 4 P 2.6
-Route::get('/user/tambah', [UserController::class, 'tambah']);
-Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
-Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
-
-Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,8 +22,8 @@ Route::get('/kategori/create', [KategoriController::class, 'create']);
 Route::post('/kategori', [KategoriController::class, 'store']);
 
 //Soal No 3 PWL 5
-Route::get('/kategori/edit/{$id}', [KategoriController::class, 'edit']);
-Route::post('/kategori/{id}', [KategoriController::class, 'store2']);
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('/kategori/edit');
+Route::put('/kategori/{id}', [KategoriController::class, 'store2'])->name('/kategori/store2');
 
 //Soal No 4 PWL 5
-Route::get('/kategori/delete/{$id}', [KategoriController::class, 'delete']);
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete'])->name('/kategori/delete');
