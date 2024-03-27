@@ -2,43 +2,99 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\m_user;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class POSController extends Controller
 {
-    public function home()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        return view('welcome')
-            ->with('name', 'Ratnasari');
+        //fungsi eloquent menampilkan data menggunakan pagination
+        $useri = m_user::all(); //mengambil semua isi tabel
+        return view('m_user.index', compact('useri'))->with('i');
     }
-    public function category()
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $products = ['Sembako', 'Sayuran & Buah', 'Skincare', 'Peralatan Bayi', 'ATK'];
-        return view('products', ['category' => 'Kategori Produk', 'products' => $products]);
+        return view('m_user.create');
     }
-    public function sembako()
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        $products = ['Beras', 'Minyak', 'Gula', 'Telor', 'Mie', 'Kecap'];
-        return view('products', ['category' => 'Sembako', 'products' => $products]);
+        //melakukan validasi data 
+        $request->validate([
+            'user_id' => 'max 20',
+            'username' => 'required',
+            'nama' => 'required',
+            'level_id' => 'required',
+        ]);
+
+        //fungsi eloquent untuk menambah data
+        //m_user::create($request->all());
+
+        m_user::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => Hash::make($request->password),
+            'level_id' => $request->level_id,
+        ]);
+
+        return redirect()->route('m_user.index')->with('success', 'User Berhasil Ditambahkan');
     }
-    public function sayurbuah()
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id, m_user $useri)
     {
-        $products = ['Sawi', 'Apel', 'Kangkung', 'Jeruk', 'Tomat', 'Cabe'];
-        return view('products', ['category' => 'Sayur & Buah', 'products' => $products]);
+        $useri = m_user::findOrFail($id);
+        return view('m_user.show', compact('useri'));
     }
-    public function skincare()
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $products = ['Bedak', 'Sunscreen', 'Serum', 'Lipstik', 'Maskara', 'Pensil Alis'];
-        return view('products', ['category' => 'Skincare', 'products' => $products]);
+        $useri = m_user::find($id);
+        return view('m_user.edit', compact('useri'));
     }
-    public function peralatanbayi()
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $products = ['Pampers', 'Minyak Telon', 'Bedak', 'Baju Anak', 'Susu', 'Botol Susu'];
-        return view('products', ['category' => 'Peralatan Bayi', 'products' => $products]);
+        $request->validate([
+            'user_id' => 'max 20',
+            'username' => 'required',
+            'nama' => 'required',
+        ]);
+
+        //fungsi eloquent untuk mengupdate data inputan kita
+        m_user::find($id)->update($request->all());
+
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('m_user.index')->with('success', 'Data Berhasil Diupdate');
     }
-    public function atk()
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-        $products = ['Pensil', 'Bulpen', 'Buku', 'Map Kertas', 'Penghapus', 'Pengaris'];
-        return view('products', ['category' => 'ATK', 'products' => $products]);
+        $useri = m_user::findOrFail($id)->delete();
+        return \redirect()->route('m_user.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

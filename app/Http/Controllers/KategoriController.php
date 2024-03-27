@@ -5,26 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\KategoriModel;
 use Illuminate\Http\Request;
 use App\DataTables\KategoriDataTable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class KategoriController extends Controller
 {
-    public function index(KategoriDataTable $dataTable)
+    /*public function index(KategoriDataTable $dataTable)
     {
         return $dataTable->render('kategori.index');
-    }
-    public function create()
+    }*/
+    public function create(): View
     {
         return view('kategori.create');
     }
     public function store(Request $request)
     {
-        KategoriModel::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori,
+        $validated = $request->validate([
+            'kategori_kode' => 'bail|required|unique:m_kategori|max:255',
+            'kategori_nama' => 'required',
         ]);
+
         return redirect('/kategori');
     }
-    //Soal 3 PWL 5
+    /*//Soal 3 PWL 5
     public function edit($id)
     {
         $kategori = KategoriModel::find($id);
@@ -48,5 +51,5 @@ class KategoriController extends Controller
         $kategori->delete();
 
         return redirect(('/kategori'));
-    }
+    }*/
 }

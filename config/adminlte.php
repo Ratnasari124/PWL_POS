@@ -328,6 +328,12 @@ return [
             'url' => 'kategori',
             'icon' => 'far fa-fw list-alt',
         ],
+        //Tugas 2 PWL 6
+        [
+            'text' => 'Level',
+            'url' => 'level',
+            'icon' => 'far fa-fw list-alt',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
