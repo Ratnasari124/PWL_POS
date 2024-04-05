@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Spatie\FlareClient\View;
 
 class WelcomeController extends Controller
 {
-    public function hello()
+    public function index()
     {
-        return 'Hello World';
-    }
-    /*public function greeting()
-    {
-        return view('blog.hello', ['name' => 'Ratnasari']);
-    }*/
-    public function greeting()
-    {
-        return view('blog.hello')
-            ->with('name', 'Ratnasari')
-            ->with('occupation', 'Student');
+        $breadcrumb = (object)[
+            'title' => 'Selamat Datang',
+            'list' => ['Home', 'Welcome']
+        ];
+
+        $activeMenu = 'dashboard';
+
+        return view('welcome', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 }

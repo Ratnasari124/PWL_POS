@@ -1,53 +1,45 @@
-@extends('layout.app')
+@extends('layout.template')
 
-{{-- Customize layout sections --}}
-@section('subtitle', 'Kategori')
-@section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Create')
-
-{{-- Content body: main page content --}}
 @section('content')
-<div class="container">
-    <div class="card card-primary">
+    <div class="card card-outline card-primary">
         <div class="card-header">
-            <div class="card-title">Buat kategori baru</div>
+            <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools"></div>
         </div>
-
-        <form action="../kategori" method="post">
-            @csrf {{-- Tambahkan ini untuk menambahkan token CSRF --}}
-
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="kodeKategori">Kode Kategori</label>
-                    <input type="text" name="kategori_kode" id="kodeKategori" 
-                    class="form-control @error('kategori_kode') is-invalid @enderror" 
-                    placeholder="Masukkan Kode Kategori">
-
-                    @error('kategor_kode')
-                    <div class="alert alert-danger">{{ $massage }}</div>
-                    @enderror
+        <div class="card-body">
+            <form method="POST" action="{{ url('kategori') }}" class="form-horizontal">
+                @csrf
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Kode Kategori</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="kategoriKode" name="kategoriKode" value="{{ old('kategoriKode') }}" required>
+                        @error('kategoriKode')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="namaKategori">Nama Kategori</label>
-                    <input type="text" name="kategori_nama" id="namaKategori" class="form-control" placeholder="Masukkan Nama Kategori">
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Nama Kategori</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="kategoriNama" name="kategoriNama" required>
+                        @error('kategoriNama')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-            </div>
-
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label"></label>
+                    <div class="col-11">
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('level')}}">Kembali</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-
-     {{-- Tampilkan pesan kesalahan validasi --}}
-     @if ($errors->any())
-     <div class="alert alert-danger">
-         <ul>
-             @foreach ($errors->all() as $error)
-                 <li>{{ $error }}</li>
-             @endforeach
-         </ul>
-     </div>
- @endif
-</div>
 @endsection
+
+@push('css')
+@endpush
+@push('js')
+@endpush
