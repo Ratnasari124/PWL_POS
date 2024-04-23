@@ -12,7 +12,7 @@
         <div class="card-header">Tampilan <?php echo (Auth::user()->level_id == 1)?'Admin':'Manager'; ?></div>
         <div class="card-body">
             <h1>Login Sebagai:
-                <?php echo (Auth::user()>level_id ==1)?'Admin':'Manager'; ?></h1>
+                <?php echo (Auth::user()->level_id == 1)?'Admin':'Manager'; ?></h1>
             <a href="{{ route('logout') }}">Logout</a>
         </div>
     </div>

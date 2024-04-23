@@ -36,7 +36,7 @@
 
         <table class="table table-bordered table-striped table-hover table-sm" id="table_barang">
             <thead>
-                <tr><th>ID</th><th>ID Kategori</th><th>Kode barang</th><th>Nama Barang</th><th>Harga Beli</th><th>Harga Beli</th><th>Aksi</th></tr>
+                <tr><th>ID</th><th>ID Kategori</th><th>Kode barang</th><th>Nama Barang</th><th>Harga Beli</th><th>Harga Jual</th><th>Aksi</th></tr>
             </thead>
         </table>
     </div>
