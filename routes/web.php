@@ -12,6 +12,8 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ManagerController;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Request;
 
 Route::get('/', [WelcomeController::class, 'index']);
 

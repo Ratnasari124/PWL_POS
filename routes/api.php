@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Controllers\Api\RegisterController;
+use Illuminate\Controllers\Api\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,10 @@ use Illuminate\Support\Facades\Route;
 });*/
 //pwl 10
 Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
+
+
+Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
+Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
