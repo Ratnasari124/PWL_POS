@@ -81,7 +81,14 @@ Route::get('transaksi', function () {
         'data' => $transaksi,
     ]);
 });
+Route::get('transaksi/{transaksi}', function () {
+    $transaksi = PenjualanModel::all();
 
-//Route::get('transaksi/{transaksi}', [PenjualanController::class, 'show']);
+    return response()->json([
+        'success' => true,
+        'data' => $transaksi,
+    ]);
+});
+Route::get('transaksi/{transaksi}', [PenjualanController::class, 'show']);
 Route::put('transaksi/{transaksi}', [PenjualanController::class, 'update']);
 Route::delete('transaksi/{transaksi}', [PenjualanController::class, 'destroy']);
